@@ -24,7 +24,6 @@ def get_updates():
 def get_message():
     data = get_updates()
     last_object = data['result'][-1]
-    print(last_object)
     current_update_id = last_object['update_id']
     global last_update_id
     if last_update_id != current_update_id:
@@ -147,6 +146,7 @@ def main():
                 send_message(chat_id, """Привет, я твой личный библиотекарь! Напиши ДОБАВИТЬ, УДАЛИТЬ, чтобы редактировать список твоих книг.
 Чтобы просмотреть весь список, напиши СПИСОК.
 Чтобы очистить список, напиши УДАЛИТЬ СПИСОК.""")
+                last_comand = ''
             elif last_comand:
                 if (modify_books(text)):
                     last_comand = ''
@@ -154,6 +154,9 @@ def main():
                     send_message(chat_id, get_books())
                 else:
                     send_message(chat_id, "Это не число!")
+            elif 'удалить список' in text.lower():
+                delete_books()
+                send_message(chat_id, get_books())
             elif 'добавить' in text.lower():
                 last_comand = 'добавить'
                 send_message(chat_id, 'Напиши название и автора. Например: "Война и мир" Толстой')
@@ -162,9 +165,6 @@ def main():
                 send_message(chat_id, get_books())
                 send_message(chat_id, 'Напиши номер книги. Если ты хочешь удалить первую книгу в списке, напиши 1')
             elif 'список' in text.lower():
-                send_message(chat_id, get_books())
-            elif 'удалить список' in text.lower():
-                delete_books()
                 send_message(chat_id, get_books())
             else:
                 send_message(chat_id)
