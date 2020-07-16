@@ -107,6 +107,13 @@ def write_file(filename, text):
         print("Ошибка: write_file")
         return None
 
+def delete_books():
+    try:
+        filename = 'bot.txt'
+        os.remove(filename)
+    except Exception:
+        print("Ошибка: delete_books")
+
 def modify_books(text):
      global last_comand
      if last_comand == 'добавить':
@@ -155,6 +162,9 @@ def main():
                 send_message(chat_id, get_books())
                 send_message(chat_id, 'Напиши номер книги. Если ты хочешь удалить первую книгу в списке, напиши 1')
             elif 'список' in text.lower():
+                send_message(chat_id, get_books())
+            elif 'удалить список' in text.lower():
+                delete_books()
                 send_message(chat_id, get_books())
             else:
                 send_message(chat_id)
