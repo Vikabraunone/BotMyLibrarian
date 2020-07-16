@@ -154,17 +154,17 @@ def main():
                     send_message(chat_id, get_books())
                 else:
                     send_message(chat_id, "Это не число!")
-            elif 'удалить список' in text.lower():
+            elif 'удалить список' == text.lower():
                 delete_books()
                 send_message(chat_id, get_books())
-            elif 'добавить' in text.lower():
+            elif 'добавить' == text.lower():
                 last_comand = 'добавить'
                 send_message(chat_id, 'Напиши название и автора. Например: "Война и мир" Толстой')
-            elif 'удалить' in text.lower():
+            elif 'удалить' == text.lower():
                 last_comand = 'удалить'
                 send_message(chat_id, get_books())
                 send_message(chat_id, 'Напиши номер книги. Если ты хочешь удалить первую книгу в списке, напиши 1')
-            elif 'список' in text.lower():
+            elif 'список' == text.lower():
                 send_message(chat_id, get_books())
             else:
                 send_message(chat_id)
